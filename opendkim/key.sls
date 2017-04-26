@@ -28,6 +28,7 @@ include:
     - mode: 600
     - user: {{ user }} 
     - group: {{ group}}
+    - makedirs: True
     - contents: |
         {{ key | indent(8) }} 
     - watch_in:
@@ -47,6 +48,7 @@ include:
     - source: salt://opendkim/files/KeyTable.tmpl
     - user: {{ user }}
     - group: {{ group }}
+    - makedirs: True
     - template: 'jinja'
     - backup: minion
     - context:
@@ -69,6 +71,7 @@ include:
     - source: salt://opendkim/files/SigningTable.tmpl
     - user: {{ user }}
     - group: {{ group }}
+    - makedirs: True
     - template: 'jinja'
     - backup: minion
     - context:
