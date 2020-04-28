@@ -25,4 +25,6 @@ opendkim:
         selector: |
           -----BEGIN RSA PRIVATE KEY-----
           -----END RSA PRIVATE KEY-----
- 
+    genkey:
+      example.net:
+        - selector 

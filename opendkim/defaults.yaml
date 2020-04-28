@@ -2,6 +2,7 @@
 # vim: ft=yaml
 opendkim:
   pkg: opendkim
+  genkey_pkg: opendkim-tools
   config: '/etc/opendkim.conf'
   conf:
     UserID: "opendkim:opendkim"
