@@ -63,7 +63,7 @@ opendkim-genkey:
     {% set file = opendkim.privateKey.directory ~ '/' ~  domainName ~ '/' ~ selector ~ '.private' %}
 {{ file }}:
   cmd.run:
-    - name: opendkim-genkey -s {{ selector }} -d {{ domainName }} -D {{ opendkim.privateKey.directory }}
+    - name: opendkim-genkey -s {{ selector }} -d {{ domainName }} -D {{ opendkim.privateKey.directory }}/{{ domainName }}
     - unless:
       - test -f {{ file }}
     - watch_in:
@@ -103,7 +103,6 @@ opendkim-genkey:
 {%- if ':' in opendkim.conf.SigningTable %}
 {%- set type, filePath = opendkim.conf.SigningTable.split(':') %}
 {%- else %}
-{%- set type = '' %}
 {%- set filePath = opendkim.conf.SigningTable %}
 {%- endif %}
 {{ filePath }}:
@@ -116,6 +115,7 @@ opendkim-genkey:
     - template: 'jinja'
     - backup: minion
     - context:
+        type: {{ type | default('') }}
         key: {{ keys }}
         keyDirectory: {{ opendkim.privateKey.directory }}
         SigningTable: {{ opendkim.conf.SigningTable }}

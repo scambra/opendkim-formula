@@ -25,7 +25,6 @@
 
 #example.com default._domainkey.example.com
 
-{%- set type, filePath = SigningTable.split(':') %}
 {%- for domainName, domain in key.items() %}
   {%- for selector, key in domain.items() %}
     {%- if type == "refile" %}
