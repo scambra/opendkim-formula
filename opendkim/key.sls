@@ -97,7 +97,12 @@ opendkim-genkey:
 
 {% if 'manageSigningTable' in opendkim and 'SigningTable' in opendkim.conf and opendkim.manageSigningTable == true %}
 
+{%- if ':' in opendkim.conf.SigningTable %}
 {%- set type, filePath = opendkim.conf.SigningTable.split(':') %}
+{%- else %}
+{%- set type = '' %}
+{%- set filePath = opendkim.conf.SigningTable %}
+{%- endif %}
 {{ filePath }}:
   file.managed:
     - mode: 640
