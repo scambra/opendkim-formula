@@ -66,7 +66,10 @@ opendkim-genkey:
     - name: opendkim-genkey -s {{ selector }} -d {{ domainName }} -D {{ opendkim.privateKey.directory }}
     - unless:
       - test -f {{ file }}
+    - watch_in:
+      - service: opendkim_service
     - require:
+      - pkg: opendkim_packages
       - pkg: opendkim-genkey
 
   {% endfor %}
