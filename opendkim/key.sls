@@ -64,6 +64,7 @@ opendkim-genkey:
 {{ file }}:
   cmd.run:
     - name: opendkim-genkey -s {{ selector }} -d {{ domainName }} -D {{ opendkim.privateKey.directory }}/{{ domainName }}
+    - runas: opendkim
     - unless:
       - test -f {{ file }}
     - watch_in:
